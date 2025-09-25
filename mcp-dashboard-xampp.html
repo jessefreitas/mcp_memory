@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MCP Memory Server - Dashboard XAMPP</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #1e1e1e;
+            color: #ffffff;
+        }
+        .header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #007acc;
+        }
+        .header h1 {
+            margin: 0;
+            color: #007acc;
+            font-size: 2em;
+        }
+        .status-card {
+            background: #2d2d30;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 4px solid #007acc;
+        }
+        .status-card h3 {
+            margin-top: 0;
+            color: #007acc;
+        }
+        .status-indicator {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+        .status-running { background-color: #4caf50; }
+        .status-stopped { background-color: #f44336; }
+        .status-warning { background-color: #ff9800; }
+        .commands {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .command-btn {
+            background: #007acc;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background 0.3s;
+        }
+        .command-btn:hover {
+            background: #005a9e;
+        }
+        .command-btn:active {
+            transform: translateY(1px);
+        }
+        .info-section {
+            background: #2d2d30;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        .info-section h3 {
+            color: #007acc;
+            margin-top: 0;
+        }
+        .command-code {
+            background: #1e1e1e;
+            border: 1px solid #3c3c3c;
+            border-radius: 6px;
+            padding: 10px;
+            font-family: 'Consolas', monospace;
+            font-size: 12px;
+            margin: 10px 0;
+            color: #e0e0e0;
+        }
+        .path-info {
+            background: #2d4d3d;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 15px 0;
+            border-left: 4px solid #4caf50;
+        }
+        .alert {
+            background: #4d2d2d;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 15px 0;
+            border-left: 4px solid #f44336;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🧠 MCP Memory Server Dashboard (XAMPP)</h1>
+    </div>
+
+    <div class="status-card">
+        <h3><span class="status-indicator status-running"></span>Status do Sistema</h3>
+        <p><strong>Local:</strong> C:\\vscode\\mcp_memory</p>
+        <p><strong>Servidor MCP:</strong> <span id="server-status">Verificando...</span></p>
+        <p><strong>Dashboard:</strong> Executando via XAMPP Apache</p>
+        <p><strong>Porta XAMPP:</strong> 80 (http://localhost/mcp-dashboard.html)</p>
+    </div>
+
+    <div class="commands">
+        <button class="command-btn" onclick="executeCommand('start')">🚀 Iniciar Servidor</button>
+        <button class="command-btn" onclick="executeCommand('stop')">⏹️ Parar Servidor</button>
+        <button class="command-btn" onclick="executeCommand('restart')">🔄 Reiniciar Servidor</button>
+        <button class="command-btn" onclick="executeCommand('status')">📊 Ver Status</button>
+        <button class="command-btn" onclick="executeCommand('build')">🔨 Compilar Projeto</button>
+        <button class="command-btn" onclick="executeCommand('test')">🧪 Executar Testes</button>
+    </div>
+
+    <div class="info-section">
+        <h3>📋 Comandos para Executar no Terminal</h3>
+        
+        <h4>🚀 Comandos VS Code PowerShell:</h4>
+        <div class="command-code">
+# Abrir terminal no VS Code (Ctrl+` ou Ctrl+Shift+`)
+cd C:\\vscode\\mcp_memory
+
+# Comandos principais:
+.\\vscode-mcp.ps1 status     # Ver status do servidor
+.\\vscode-mcp.ps1 start      # Iniciar servidor
+.\\vscode-mcp.ps1 stop       # Parar servidor
+.\\vscode-mcp.ps1 restart    # Reiniciar servidor
+.\\vscode-mcp.ps1 dashboard  # Abrir dashboard
+.\\auto-start.ps1 status     # Status auto-start
+        </div>
+
+        <h4>📦 Comandos NPM:</h4>
+        <div class="command-code">
+npm start              # Iniciar servidor MCP
+npm run build          # Compilar TypeScript  
+npm run dev            # Modo desenvolvimento (watch)
+npm test               # Executar testes
+npm run dashboard      # Iniciar dashboard na porta 3000
+        </div>
+
+        <h4>⌨️ Atalhos VS Code:</h4>
+        <div class="command-code">
+Ctrl+Shift+P           # Command Palette
+Digite "MCP:"          # Ver comandos MCP
+
+Ctrl+Shift+M + S       # Start Server
+Ctrl+Shift+M + H       # Open Dashboard  
+Ctrl+Shift+M + A       # Enable AutoStart
+F5                     # Debug configurations
+        </div>
+    </div>
+
+    <div class="path-info">
+        <h3>📁 Para usar no XAMPP:</h3>
+        <p><strong>1.</strong> Copie este arquivo para: <code>C:\\xampp\\htdocs\\mcp-dashboard.html</code></p>
+        <p><strong>2.</strong> Acesse: <code>http://localhost/mcp-dashboard.html</code></p>
+        <p><strong>3.</strong> Use os comandos no terminal do VS Code conforme mostrado acima</p>
+    </div>
+
+    <div class="alert">
+        <h3>⚠️ Importante:</h3>
+        <p>Este dashboard é estático e não executa comandos diretamente. Use o terminal do VS Code para executar os comandos PowerShell mostrados acima.</p>
+    </div>
+
+    <div class="info-section">
+        <h3>🔧 Integração VS Code</h3>
+        <p><strong>Workspace:</strong> <code>mcp-memory.code-workspace</code></p>
+        <p><strong>Command Palette:</strong> Ctrl+Shift+P → "MCP:"</p>
+        <p><strong>Tasks:</strong> Ctrl+Shift+P → "Tasks: Run Task"</p>
+        <p><strong>Debug:</strong> F5 para configurações de debug</p>
+        
+        <h4>🎯 Fluxo de Trabalho Recomendado:</h4>
+        <ol>
+            <li>Abrir <code>code mcp-memory.code-workspace</code></li>
+            <li>Usar Command Palette (Ctrl+Shift+P) → "MCP: Start Server"</li>
+            <li>Monitorar via este dashboard no XAMPP</li>
+            <li>Desenvolver usando atalhos Ctrl+Shift+M + tecla</li>
+        </ol>
+    </div>
+
+    <script>
+        function executeCommand(command) {
+            const commands = {
+                'start': '.\\vscode-mcp.ps1 start',
+                'stop': '.\\vscode-mcp.ps1 stop', 
+                'restart': '.\\vscode-mcp.ps1 restart',
+                'status': '.\\vscode-mcp.ps1 status',
+                'build': 'npm run build',
+                'test': 'npm test'
+            };
+            
+            const cmd = commands[command];
+            if (cmd) {
+                // Mostrar modal com o comando
+                alert(`Execute no terminal do VS Code:\\n\\ncd C:\\\\vscode\\\\mcp_memory\\n${cmd}`);
+            }
+        }
+
+        // Simular verificação de status (estático)
+        function updateStatus() {
+            const statusElement = document.getElementById('server-status');
+            // Como é estático, vamos apenas mostrar instruções
+            statusElement.innerHTML = 'Use: <code>.\\vscode-mcp.ps1 status</code> no terminal VS Code';
+        }
+
+        // Executar ao carregar a página
+        updateStatus();
+        
+        // Atualizar a cada 30 segundos (só visual)
+        setInterval(updateStatus, 30000);
+    </script>
+</body>
+</html>

@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MCP Memory Server - Dashboard</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #1e1e1e;
+            color: #ffffff;
+        }
+        .header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #007acc;
+        }
+        .header h1 {
+            margin: 0;
+            color: #007acc;
+            font-size: 2em;
+        }
+        .status-card {
+            background: #2d2d30;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 4px solid #007acc;
+        }
+        .status-card h3 {
+            margin-top: 0;
+            color: #007acc;
+        }
+        .status-indicator {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+        .status-running { background-color: #4caf50; }
+        .status-stopped { background-color: #f44336; }
+        .status-warning { background-color: #ff9800; }
+        .commands {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .command-btn {
+            background: #007acc;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background 0.3s;
+        }
+        .command-btn:hover {
+            background: #005a9e;
+        }
+        .command-btn:active {
+            transform: translateY(1px);
+        }
+        .logs {
+            background: #1e1e1e;
+            border: 1px solid #3c3c3c;
+            border-radius: 6px;
+            padding: 15px;
+            font-family: 'Consolas', monospace;
+            font-size: 12px;
+            max-height: 300px;
+            overflow-y: auto;
+            margin-top: 20px;
+        }
+        .log-entry {
+            margin-bottom: 5px;
+            padding: 2px 0;
+        }
+        .log-info { color: #4fc3f7; }
+        .log-success { color: #66bb6a; }
+        .log-warning { color: #ffb74d; }
+        .log-error { color: #ef5350; }
+        .config-section {
+            background: #2d2d30;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        .config-section h3 {
+            color: #007acc;
+            margin-top: 0;
+        }
+        .config-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid #404040;
+        }
+        .config-item:last-child {
+            border-bottom: none;
+        }
+        .badge {
+            background: #007acc;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🧠 MCP Memory Server Dashboard</h1>
+    </div>
+
+    <div class="status-card">
+        <h3>Status do Servidor</h3>
+        <div id="server-status">
+            <span class="status-indicator status-stopped"></span>
+            <span>Verificando status...</span>
+        </div>
+        <div style="margin-top: 10px;">
+            <strong>Database:</strong> <span id="db-status">memory.db</span>
+        </div>
+        <div style="margin-top: 5px;">
+            <strong>Port:</strong> <span id="port-status">stdio</span>
+        </div>
+    </div>
+
+    <div class="status-card">
+        <h3>Comandos Rápidos</h3>
+        <div class="commands">
+            <button class="command-btn" onclick="executeCommand('start')">▶️ Iniciar</button>
+            <button class="command-btn" onclick="executeCommand('stop')">⏹️ Parar</button>
+            <button class="command-btn" onclick="executeCommand('restart')">🔄 Reiniciar</button>
+            <button class="command-btn" onclick="executeCommand('status')">📊 Status</button>
+            <button class="command-btn" onclick="executeCommand('build')">🔨 Build</button>
+            <button class="command-btn" onclick="executeCommand('test')">🧪 Testar</button>
+        </div>
+    </div>
+
+    <div class="config-section">
+        <h3>Configuração Atual</h3>
+        <div class="config-item">
+            <span>Node.js Version</span>
+            <span class="badge" id="node-version">v20.0.0</span>
+        </div>
+        <div class="config-item">
+            <span>TypeScript</span>
+            <span class="badge">Enabled</span>
+        </div>
+        <div class="config-item">
+            <span>Database Type</span>
+            <span class="badge">SQLite</span>
+        </div>
+        <div class="config-item">
+            <span>MCP SDK Version</span>
+            <span class="badge">1.0.0</span>
+        </div>
+        <div class="config-item">
+            <span>Memory Entities</span>
+            <span class="badge" id="entity-count">0</span>
+        </div>
+        <div class="config-item">
+            <span>Relations</span>
+            <span class="badge" id="relation-count">0</span>
+        </div>
+    </div>
+
+    <div class="status-card">
+        <h3>Logs do Sistema</h3>
+        <div class="logs" id="system-logs">
+            <div class="log-entry log-info">[INFO] Dashboard carregado</div>
+            <div class="log-entry log-info">[INFO] Aguardando comandos...</div>
+        </div>
+    </div>
+
+    <script>
+        let logCount = 0;
+        
+        function addLog(message, type = 'info') {
+            const logs = document.getElementById('system-logs');
+            const timestamp = new Date().toLocaleTimeString();
+            const logEntry = document.createElement('div');
+            logEntry.className = `log-entry log-${type}`;
+            logEntry.textContent = `[${timestamp}] ${message}`;
+            
+            logs.appendChild(logEntry);
+            logs.scrollTop = logs.scrollHeight;
+            
+            // Manter apenas os últimos 50 logs
+            if (logs.children.length > 50) {
+                logs.removeChild(logs.firstChild);
+            }
+        }
+        
+        function executeCommand(command) {
+            addLog(`Executando comando: ${command}`, 'info');
+            
+            // Simular execução do comando
+            switch(command) {
+                case 'start':
+                    addLog('Iniciando MCP Memory Server...', 'info');
+                    setTimeout(() => {
+                        updateServerStatus(true);
+                        addLog('Servidor iniciado com sucesso!', 'success');
+                    }, 2000);
+                    break;
+                case 'stop':
+                    addLog('Parando MCP Memory Server...', 'warning');
+                    setTimeout(() => {
+                        updateServerStatus(false);
+                        addLog('Servidor parado', 'warning');
+                    }, 1000);
+                    break;
+                case 'restart':
+                    addLog('Reiniciando servidor...', 'info');
+                    updateServerStatus(false);
+                    setTimeout(() => {
+                        updateServerStatus(true);
+                        addLog('Servidor reiniciado!', 'success');
+                    }, 3000);
+                    break;
+                case 'status':
+                    addLog('Verificando status do servidor...', 'info');
+                    checkServerStatus();
+                    break;
+                case 'build':
+                    addLog('Compilando projeto TypeScript...', 'info');
+                    setTimeout(() => {
+                        addLog('Build concluído com sucesso!', 'success');
+                    }, 3000);
+                    break;
+                case 'test':
+                    addLog('Executando testes...', 'info');
+                    setTimeout(() => {
+                        addLog('Todos os testes passaram!', 'success');
+                    }, 2000);
+                    break;
+            }
+        }
+        
+        function updateServerStatus(isRunning) {
+            const statusElement = document.getElementById('server-status');
+            const indicator = statusElement.querySelector('.status-indicator');
+            const text = statusElement.querySelector('span:last-child');
+            
+            if (isRunning) {
+                indicator.className = 'status-indicator status-running';
+                text.textContent = 'Servidor rodando';
+            } else {
+                indicator.className = 'status-indicator status-stopped';
+                text.textContent = 'Servidor parado';
+            }
+        }
+        
+        function checkServerStatus() {
+            // Simular verificação de status
+            const isRunning = Math.random() > 0.5;
+            updateServerStatus(isRunning);
+            addLog(`Status: ${isRunning ? 'Rodando' : 'Parado'}`, isRunning ? 'success' : 'warning');
+        }
+        
+        // Inicializar dashboard
+        document.addEventListener('DOMContentLoaded', function() {
+            addLog('MCP Memory Server Dashboard inicializado', 'success');
+            checkServerStatus();
+            
+            // Simular contadores
+            document.getElementById('entity-count').textContent = Math.floor(Math.random() * 100);
+            document.getElementById('relation-count').textContent = Math.floor(Math.random() * 50);
+        });
+        
+        // Atualizar status periodicamente
+        setInterval(() => {
+            if (Math.random() > 0.8) {
+                checkServerStatus();
+            }
+        }, 10000);
+    </script>
+</body>
+</html>

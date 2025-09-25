@@ -1,0 +1,69 @@
+{
+  "folders": [
+    {
+      "path": "."
+    }
+  ],
+  "settings": {
+    "typescript.preferences.includePackageJsonAutoImports": "on",
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": "explicit"
+    },
+    "files.associations": {
+      "*.md": "markdown",
+      "*.ps1": "powershell"
+    },
+    "terminal.integrated.defaultProfile.windows": "PowerShell",
+    "terminal.integrated.profiles.windows": {
+      "MCP PowerShell": {
+        "source": "PowerShell",
+        "args": ["-NoExit", "-Command", "Write-Host '🧠 MCP Memory Server Environment' -ForegroundColor Cyan"]
+      }
+    },
+    "workbench.colorCustomizations": {
+      "statusBar.background": "#007acc",
+      "statusBar.foreground": "#ffffff"
+    },
+    "workbench.editor.labelFormat": "short",
+    "explorer.fileNesting.enabled": true,
+    "explorer.fileNesting.patterns": {
+      "*.ts": "${capture}.js, ${capture}.d.ts, ${capture}.js.map, ${capture}.d.ts.map",
+      "package.json": "package-lock.json, npm-shrinkwrap.json, yarn.lock",
+      "README.md": "*.md"
+    },
+    "files.watcherExclude": {
+      "**/node_modules/**": true,
+      "**/build/**": true,
+      "**/memory.db*": true
+    },
+    "search.exclude": {
+      "**/node_modules": true,
+      "**/build": true,
+      "**/*.log": true
+    },
+    "mcp.servers": {
+      "memory-server": {
+        "command": "node",
+        "args": ["./build/index.js"],
+        "cwd": "${workspaceFolder}",
+        "env": {
+          "NODE_ENV": "development",
+          "MCP_MEMORY_DB": "./memory.db"
+        }
+      }
+    },
+    "mcp.memory.autoStart": true,
+    "mcp.memory.dashboard.enabled": true,
+    "mcp.memory.statusBar.show": true
+  },
+  "extensions": {
+    "recommendations": [
+      "ms-vscode.vscode-typescript-next",
+      "esbenp.prettier-vscode",
+      "ms-vscode.vscode-json",
+      "bradlc.vscode-tailwindcss",
+      "ms-vscode.powershell"
+    ]
+  }
+}

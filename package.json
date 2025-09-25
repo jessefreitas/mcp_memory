@@ -1,0 +1,67 @@
+{
+  "name": "mcp-memory-server",
+  "version": "1.0.0",
+  "description": "Model Context Protocol Memory Server - Persistent memory and entity management for AI conversations",
+  "type": "module",
+  "main": "build/index.js",
+  "bin": {
+    "mcp-memory-server": "build/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "start": "node build/index.js",
+    "dev": "tsc --watch",
+    "test": "jest",
+    "lint": "eslint src/**/*.ts",
+    "format": "prettier --write src/**/*.ts",
+    "dashboard": "powershell -ExecutionPolicy Bypass -File setup-xampp.ps1 -Open",
+    "dashboard:node": "node dashboard-server.js",
+    "server:debug": "node --inspect build/index.js",
+    "server:memory": "cross-env MCP_MEMORY_DB=:memory: node build/index.js",
+    "clean": "rimraf build",
+    "setup": "npm install && npm run build",
+    "install:service": "powershell -ExecutionPolicy Bypass -File install-service.ps1 install",
+    "uninstall:service": "powershell -ExecutionPolicy Bypass -File install-service.ps1 uninstall",
+    "autostart:enable": "powershell -ExecutionPolicy Bypass -File auto-start.ps1 task -Dashboard",
+    "autostart:disable": "powershell -ExecutionPolicy Bypass -File auto-start.ps1 remove",
+    "autostart:status": "powershell -ExecutionPolicy Bypass -File auto-start.ps1 status",
+    "xampp:setup": "powershell -ExecutionPolicy Bypass -File setup-xampp.ps1",
+    "xampp:open": "powershell -ExecutionPolicy Bypass -File setup-xampp.ps1 -Open"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "memory",
+    "ai",
+    "llm",
+    "entities",
+    "knowledge-graph"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "fs-extra": "^11.2.0",
+    "sqlite3": "^5.1.7",
+    "uuid": "^10.0.0",
+    "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^11.0.4",
+    "@types/jest": "^29.5.11",
+    "@types/node": "^20.10.0",
+    "@types/uuid": "^10.0.0",
+    "@typescript-eslint/eslint-plugin": "^6.17.0",
+    "@typescript-eslint/parser": "^6.17.0",
+    "cross-env": "^10.0.0",
+    "eslint": "^8.56.0",
+    "jest": "^29.7.0",
+    "prettier": "^3.1.1",
+    "rimraf": "^6.0.1",
+    "ts-jest": "^29.1.1",
+    "typescript": "^5.9.2"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

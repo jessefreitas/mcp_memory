@@ -1,0 +1,79 @@
+[
+    {
+        "key": "ctrl+shift+m ctrl+s",
+        "command": "workbench.action.tasks.runTask",
+        "args": "Run MCP Memory Server",
+        "when": "workspaceFolder"
+    },
+    {
+        "key": "ctrl+shift+m ctrl+b",
+        "command": "workbench.action.tasks.runTask",
+        "args": "build",
+        "when": "workspaceFolder"
+    },
+    {
+        "key": "ctrl+shift+m ctrl+w",
+        "command": "workbench.action.tasks.runTask",
+        "args": "Watch and Build",
+        "when": "workspaceFolder"
+    },
+    {
+        "key": "ctrl+shift+m ctrl+d",
+        "command": "workbench.action.debug.start",
+        "when": "workspaceFolder"
+    },
+    {
+        "key": "ctrl+shift+m ctrl+t",
+        "command": "workbench.action.tasks.runTask",
+        "args": "Test Memory Operations",
+        "when": "workspaceFolder"
+    },
+    {
+        "key": "ctrl+shift+m ctrl+h",
+        "command": "simpleBrowser.show",
+        "args": "http://localhost:3000",
+        "when": "workspaceFolder"
+    },
+    {
+        "key": "ctrl+shift+m ctrl+a",
+        "command": "workbench.action.tasks.runTask",
+        "args": "Enable Auto Start",
+        "when": "workspaceFolder"
+    },
+    {
+        "key": "ctrl+shift+m ctrl+r",
+        "command": "workbench.action.tasks.runTask",
+        "args": "Disable Auto Start",
+        "when": "workspaceFolder"
+    },
+    {
+        "key": "ctrl+shift+m ctrl+g",
+        "command": "workbench.action.tasks.runTask",
+        "args": "Setup Windows GUI",
+        "when": "workspaceFolder"
+    },
+    {
+        "key": "ctrl+shift+m ctrl+i",
+        "command": "workbench.action.tasks.runTask",
+        "args": "MCP: Initialize Integration",
+        "when": "workspaceFolder"
+    },
+    {
+        "key": "ctrl+shift+m ctrl+p",
+        "command": "workbench.action.tasks.runTask",
+        "args": "MCP: Show Command Palette",
+        "when": "workspaceFolder"
+    },
+    {
+        "key": "ctrl+shift+m ctrl+x",
+        "command": "workbench.action.tasks.runTask",
+        "args": "MCP: Stop Server",
+        "when": "workspaceFolder"
+    },
+    {
+        "key": "ctrl+shift+m ctrl+z",
+        "command": "workbench.action.tasks.runTask",
+        "args": "MCP: Show Status",
+        "when": "workspaceFolder"
+    }
+]

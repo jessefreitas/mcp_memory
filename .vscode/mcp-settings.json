@@ -1,0 +1,37 @@
+{
+  "mcp.memory.server": {
+    "autoStart": true,
+    "autoRestart": true,
+    "showInStatusBar": true,
+    "dashboard": {
+      "enabled": true,
+      "port": 3000,
+      "autoOpen": false
+    },
+    "database": {
+      "path": "./memory.db",
+      "backup": true,
+      "backupInterval": 300000
+    },
+    "logging": {
+      "level": "info",
+      "file": "./logs/mcp-memory.log"
+    }
+  },
+  "mcp.memory.vscode": {
+    "statusBar": {
+      "show": true,
+      "alignment": "right",
+      "priority": 100
+    },
+    "notifications": {
+      "startup": true,
+      "errors": true,
+      "info": false
+    },
+    "commands": {
+      "showInCommandPalette": true,
+      "keyBindings": true
+    }
+  }
+}

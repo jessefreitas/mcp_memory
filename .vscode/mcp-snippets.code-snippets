@@ -1,0 +1,66 @@
+{
+  "MCP Memory Server": {
+    "prefix": "mcp-start",
+    "body": [
+      "# Iniciar MCP Memory Server",
+      "./mcp-server.ps1 start"
+    ],
+    "description": "Comando para iniciar o MCP Memory Server"
+  },
+  "MCP Memory Server Debug": {
+    "prefix": "mcp-debug",
+    "body": [
+      "# Iniciar MCP Memory Server em modo debug",
+      "./mcp-server.ps1 start -Debug"
+    ],
+    "description": "Comando para iniciar o MCP Memory Server em modo debug"
+  },
+  "MCP Memory Server Status": {
+    "prefix": "mcp-status",
+    "body": [
+      "# Verificar status do MCP Memory Server",
+      "./mcp-server.ps1 status"
+    ],
+    "description": "Comando para verificar o status do servidor"
+  },
+  "MCP Memory Server Stop": {
+    "prefix": "mcp-stop",
+    "body": [
+      "# Parar MCP Memory Server",
+      "./mcp-server.ps1 stop"
+    ],
+    "description": "Comando para parar o MCP Memory Server"
+  },
+  "MCP Build": {
+    "prefix": "mcp-build",
+    "body": [
+      "# Compilar projeto MCP",
+      "npm run build"
+    ],
+    "description": "Comando para compilar o projeto TypeScript"
+  },
+  "MCP Entity Create": {
+    "prefix": "mcp-entity",
+    "body": [
+      "// Exemplo de criação de entidade",
+      "const entity = {",
+      "  name: \"${1:EntityName}\",",
+      "  entityType: \"${2:EntityType}\",",
+      "  observations: [\"${3:Observation}\"]",
+      "};"
+    ],
+    "description": "Template para criar uma entidade MCP"
+  },
+  "MCP Relation Create": {
+    "prefix": "mcp-relation",
+    "body": [
+      "// Exemplo de criação de relacionamento",
+      "const relation = {",
+      "  from: \"${1:FromEntity}\",",
+      "  to: \"${2:ToEntity}\",",
+      "  relationType: \"${3:RelationType}\"",
+      "};"
+    ],
+    "description": "Template para criar um relacionamento MCP"
+  }
+}

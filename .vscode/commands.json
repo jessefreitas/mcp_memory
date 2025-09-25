@@ -1,0 +1,77 @@
+[
+  {
+    "command": "mcp.memory.start",
+    "title": "🚀 Start MCP Memory Server",
+    "category": "MCP Memory"
+  },
+  {
+    "command": "mcp.memory.stop",
+    "title": "⏹️ Stop MCP Memory Server", 
+    "category": "MCP Memory"
+  },
+  {
+    "command": "mcp.memory.restart",
+    "title": "🔄 Restart MCP Memory Server",
+    "category": "MCP Memory"
+  },
+  {
+    "command": "mcp.memory.status",
+    "title": "📊 Show MCP Memory Status",
+    "category": "MCP Memory"
+  },
+  {
+    "command": "mcp.memory.dashboard.open",
+    "title": "📈 Open Dashboard",
+    "category": "MCP Memory"
+  },
+  {
+    "command": "mcp.memory.dashboard.start",
+    "title": "📊 Start Dashboard Server",
+    "category": "MCP Memory"
+  },
+  {
+    "command": "mcp.memory.autostart.enable",
+    "title": "⚙️ Enable Windows AutoStart",
+    "category": "MCP Memory"
+  },
+  {
+    "command": "mcp.memory.autostart.disable",
+    "title": "❌ Disable Windows AutoStart",
+    "category": "MCP Memory"
+  },
+  {
+    "command": "mcp.memory.autostart.configure",
+    "title": "🛠️ Configure AutoStart (GUI)",
+    "category": "MCP Memory"
+  },
+  {
+    "command": "mcp.memory.build",
+    "title": "🔨 Build Project",
+    "category": "MCP Memory"
+  },
+  {
+    "command": "mcp.memory.clean",
+    "title": "🧹 Clean Build",
+    "category": "MCP Memory"
+  },
+  {
+    "command": "mcp.memory.test",
+    "title": "🧪 Test Memory Operations",
+    "category": "MCP Memory"
+  },
+  {
+    "command": "mcp.memory.logs.view",
+    "title": "📄 View Logs",
+    "category": "MCP Memory"
+  },
+  {
+    "command": "mcp.memory.database.backup",
+    "title": "💾 Backup Database",
+    "category": "MCP Memory"
+  },
+  {
+    "command": "mcp.memory.database.restore",
+    "title": "🔄 Restore Database",
+    "category": "MCP Memory"
+  }
+]
