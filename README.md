@@ -5,6 +5,7 @@ Um servidor de protocolo de contexto de modelo (MCP) que fornece funcionalidades
 ## 🚀 Início Rápido
 
 ### 1. Clone e Configure
+
 ```powershell
 git clone https://github.com/jessefreitas/mcp_memory.git
 cd mcp_memory
@@ -13,6 +14,7 @@ npm run build
 ```
 
 ### 2. Inicie o Servidor
+
 ```powershell
 # Configurar auto-start (Windows)
 .\auto-start.ps1
@@ -22,6 +24,7 @@ npm run build
 ```
 
 ### 3. Teste a Funcionalidade
+
 ```powershell
 # Executar teste completo
 .\run-test.ps1
@@ -31,7 +34,9 @@ npm run build
 ```
 
 ### 4. Configure Claude Desktop
+
 Adicione ao `claude_desktop_config.json`:
+
 ```json
 {
   "mcpServers": {
@@ -45,6 +50,7 @@ Adicione ao `claude_desktop_config.json`:
 ```
 
 ### 5. Teste no Claude Desktop
+
 ```
 Use o comando: mcp_memory_read_graph
 ```
@@ -346,18 +352,21 @@ const entidades = await mcp_memory_open_nodes({
 O MCP Memory Server oferece duas implementações:
 
 ### Servidor Principal (simple-index.ts) ⭐
+
 - **JSON**: Armazenamento simples e confiável em `memory.json`
 - **TypeScript SDK**: Implementação do protocolo MCP
 - **Sincronização**: Operações síncronas de leitura/escrita
 - **Simplicidade**: Código minimalista e fácil debugging
 
 ### Servidor Avançado (index.ts)
+
 - **SQLite**: Para armazenamento mais robusto
 - **Better SQLite3**: Operações de banco performáticas
 - **UUID**: Identificadores únicos
 - **Zod**: Validação de esquemas
 
 ### Tecnologias Utilizadas
+
 - **Node.js**: Runtime JavaScript
 - **TypeScript**: Linguagem de programação
 - **MCP SDK**: Protocolo de contexto de modelo
@@ -387,6 +396,7 @@ Para questões e suporte:
 ## Status Atual ✅
 
 ### Implementado
+
 - ✅ Servidor MCP funcional com persistência JSON
 - ✅ Suite completa de testes PowerShell
 - ✅ Auto-start no Windows
@@ -397,6 +407,7 @@ Para questões e suporte:
 - ✅ Verificação de persistência em tempo real
 
 ### Testado e Validado
+
 - ✅ Criação e leitura de entidades
 - ✅ Relacionamentos entre entidades
 - ✅ Persistência em memory.json
