@@ -2,13 +2,64 @@
 
 Um servidor de protocolo de contexto de modelo (MCP) que fornece funcionalidades de memória persistente para conversas com IA. Este servidor permite que aplicações de IA criem, gerenciem e consultem entidades e relacionamentos em um grafo de conhecimento persistente.
 
+## 🚀 Início Rápido
+
+### 1. Clone e Configure
+```powershell
+git clone https://github.com/jessefreitas/mcp_memory.git
+cd mcp_memory
+npm install
+npm run build
+```
+
+### 2. Inicie o Servidor
+```powershell
+# Configurar auto-start (Windows)
+.\auto-start.ps1
+
+# OU iniciar manualmente
+.\server-controller.ps1
+```
+
+### 3. Teste a Funcionalidade
+```powershell
+# Executar teste completo
+.\run-test.ps1
+
+# Verificar status
+.\quick-status.ps1
+```
+
+### 4. Configure Claude Desktop
+Adicione ao `claude_desktop_config.json`:
+```json
+{
+  "mcpServers": {
+    "mcp_memory": {
+      "command": "node",
+      "args": ["./build/simple-index.js"],
+      "cwd": "c:\\vscode\\mcp_memory"
+    }
+  }
+}
+```
+
+### 5. Teste no Claude Desktop
+```
+Use o comando: mcp_memory_read_graph
+```
+
 ## Funcionalidades
 
 - 📊 **Gerenciamento de Entidades**: Crie, atualize e exclua entidades com observações
 - 🔗 **Relacionamentos**: Estabeleça e gerencie relacionamentos entre entidades
 - 🔍 **Busca Avançada**: Procure entidades e relacionamentos por conteúdo
-- 💾 **Persistência**: Armazenamento SQLite para memória de longa duração
+- 💾 **Persistência**: Armazenamento JSON simples e confiável
 - 🎯 **Compatível com MCP**: Funciona com qualquer cliente MCP (Claude Desktop, etc.)
+- 🚀 **Auto-start**: Configuração automática no Windows
+- 🔧 **VS Code Integration**: Integração completa com VS Code
+- 🧪 **Suite de Testes**: Scripts PowerShell para teste e validação
+- 📊 **Dashboard**: Interface web para monitoramento
 
 ## Instalação
 
@@ -55,15 +106,28 @@ Para desenvolvimento local:
 ```json
 {
   "mcpServers": {
-    "memory": {
+    "mcp_memory": {
       "command": "node",
-      "args": ["./build/index.js"],
-      "env": {
-        "MCP_MEMORY_DB_PATH": "./memory.db"
-      }
+      "args": ["./build/simple-index.js"],
+      "cwd": "c:\\vscode\\mcp_memory"
     }
   }
 }
+```
+
+### Configuração Automática (Windows)
+
+Execute o script de configuração automática:
+
+```powershell
+# Configurar auto-start
+.\auto-start.ps1
+
+# Verificar status
+.\quick-status.ps1
+
+# Executar testes
+.\run-test.ps1
 ```
 
 ## Uso
@@ -155,13 +219,25 @@ O servidor também expõe recursos que podem ser acessados:
 ```
 mcp_memory/
 ├── src/
-│   ├── index.ts              # Ponto de entrada principal
+│   ├── index.ts              # Servidor MCP original (SQLite)
+│   ├── simple-index.ts       # Servidor MCP simplificado (JSON) ⭐
 │   ├── memory/
 │   │   └── MemoryManager.ts  # Gerenciador de memória SQLite
 │   ├── tools/
 │   │   └── index.ts          # Definições de ferramentas MCP
 │   └── resources/
 │       └── index.ts          # Definições de recursos MCP
+├── scripts PowerShell/       # Scripts de gerenciamento
+│   ├── run-test.ps1         # Teste de funcionalidades
+│   ├── test-mcp-direct.ps1  # Teste direto do servidor
+│   ├── quick-status.ps1     # Verificação de status
+│   ├── server-controller.ps1 # Controle do servidor
+│   └── auto-start.ps1       # Configuração de auto-start
+├── .vscode/                 # Configuração VS Code
+│   ├── tasks.json           # Tarefas do projeto
+│   ├── settings.json        # Configurações
+│   └── keybindings.json     # Atalhos
+├── memory.json              # Dados persistentes
 ├── package.json
 ├── tsconfig.json
 └── README.md
@@ -194,9 +270,23 @@ npm run lint
 npm run format
 ```
 
-## Variáveis de Ambiente
+## Scripts de Gerenciamento
 
-- `MCP_MEMORY_DB_PATH`: Caminho para o banco de dados SQLite (padrão: `./memory.db`)
+### Windows PowerShell
+
+- `.\run-test.ps1` - Executa teste completo de funcionalidades
+- `.\test-mcp-direct.ps1` - Testa comunicação direta com o servidor
+- `.\quick-status.ps1` - Verifica status do servidor e dados
+- `.\server-controller.ps1` - Inicia/para o servidor
+- `.\auto-start.ps1` - Configura inicialização automática
+- `.\test-persistence.ps1` - Monitora persistência em tempo real
+
+### VS Code
+
+- `Ctrl+Shift+P` → "MCP: Start Server" - Iniciar servidor
+- `Ctrl+Shift+P` → "MCP: Test Memory" - Executar testes
+- `Ctrl+Shift+P` → "MCP: Check Status" - Verificar status
+- `F5` - Executar em modo debug
 
 ## Exemplos de Uso
 
@@ -253,13 +343,26 @@ const entidades = await mcp_memory_open_nodes({
 
 ## Arquitetura
 
-O MCP Memory Server utiliza:
+O MCP Memory Server oferece duas implementações:
 
-- **SQLite**: Para armazenamento persistente de dados
-- **TypeScript SDK**: Para implementação do protocolo MCP
-- **Better SQLite3**: Para operações de banco de dados síncronas e performáticas
-- **UUID**: Para geração de identificadores únicos
-- **Zod**: Para validação de esquemas de entrada
+### Servidor Principal (simple-index.ts) ⭐
+- **JSON**: Armazenamento simples e confiável em `memory.json`
+- **TypeScript SDK**: Implementação do protocolo MCP
+- **Sincronização**: Operações síncronas de leitura/escrita
+- **Simplicidade**: Código minimalista e fácil debugging
+
+### Servidor Avançado (index.ts)
+- **SQLite**: Para armazenamento mais robusto
+- **Better SQLite3**: Operações de banco performáticas
+- **UUID**: Identificadores únicos
+- **Zod**: Validação de esquemas
+
+### Tecnologias Utilizadas
+- **Node.js**: Runtime JavaScript
+- **TypeScript**: Linguagem de programação
+- **MCP SDK**: Protocolo de contexto de modelo
+- **PowerShell**: Scripts de automação Windows
+- **VS Code**: Integração completa de desenvolvimento
 
 ## Contribuição
 
@@ -281,7 +384,26 @@ Para questões e suporte:
 2. Consulte a documentação do MCP em [modelcontextprotocol.io](https://modelcontextprotocol.io/)
 3. Participe das discussões da comunidade MCP
 
-## Roadmap
+## Status Atual ✅
+
+### Implementado
+- ✅ Servidor MCP funcional com persistência JSON
+- ✅ Suite completa de testes PowerShell
+- ✅ Auto-start no Windows
+- ✅ Integração total com VS Code
+- ✅ Scripts de gerenciamento e monitoramento
+- ✅ Dashboard de status HTML
+- ✅ Migração do servidor oficial MCP
+- ✅ Verificação de persistência em tempo real
+
+### Testado e Validado
+- ✅ Criação e leitura de entidades
+- ✅ Relacionamentos entre entidades
+- ✅ Persistência em memory.json
+- ✅ Carregamento automático na inicialização
+- ✅ Integração com Claude Desktop
+
+## Roadmap Futuro
 
 - [ ] Interface web para visualização do grafo
 - [ ] Suporte para importação/exportação de dados
@@ -289,3 +411,5 @@ Para questões e suporte:
 - [ ] Métricas e analytics avançadas
 - [ ] Backup automático e recuperação
 - [ ] Suporte para múltiplos bancos de dados
+- [ ] API REST para acesso externo
+- [ ] Clustering e replicação
