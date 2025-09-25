@@ -30,45 +30,6 @@ npm run build
 
 ## Configuração
 
-### Inicialização Automática com Windows
-
-O MCP Memory Server pode ser configurado para iniciar automaticamente com o Windows:
-
-#### 🎯 **Método Rápido (Recomendado)**
-```bash
-# Habilitar inicialização automática (Tarefa Agendada + Dashboard)
-npm run autostart:enable
-
-# Verificar status
-npm run autostart:status
-
-# Desabilitar se necessário
-npm run autostart:disable
-```
-
-#### 🖥️ **Interface Gráfica**
-```bash
-# Abrir configurador visual
-powershell -ExecutionPolicy Bypass -File setup-windows.ps1
-```
-
-#### ⚙️ **Métodos Disponíveis**
-
-1. **Pasta de Inicialização** (Simples)
-   ```bash
-   .\auto-start.ps1 startup -Dashboard
-   ```
-
-2. **Tarefa Agendada** (Recomendado)
-   ```bash
-   .\auto-start.ps1 task -Dashboard
-   ```
-
-3. **Serviço Windows** (Avançado - Requer Admin)
-   ```bash
-   .\install-service.ps1 install
-   ```
-
 ### Claude Desktop
 
 Adicione ao seu arquivo de configuração do Claude Desktop (`claude_desktop_config.json`):
@@ -77,10 +38,10 @@ Adicione ao seu arquivo de configuração do Claude Desktop (`claude_desktop_con
 {
   "mcpServers": {
     "memory": {
-      "command": "node",
-      "args": ["C:\\vscode\\mcp_memory\\build\\index.js"],
+      "command": "npx",
+      "args": ["-y", "mcp-memory-server"],
       "env": {
-        "MCP_MEMORY_DB_PATH": "C:\\vscode\\mcp_memory\\memory.db"
+        "MCP_MEMORY_DB_PATH": "./memory.db"
       }
     }
   }
@@ -320,134 +281,11 @@ Para questões e suporte:
 2. Consulte a documentação do MCP em [modelcontextprotocol.io](https://modelcontextprotocol.io/)
 3. Participe das discussões da comunidade MCP
 
-## 💼 Integração com VS Code
-
-### 🚀 Setup Completo para Desenvolvimento
-
-Este projeto está **totalmente integrado ao VS Code** com todas as ferramentas necessárias:
-
-#### 1. **Workspace Configurado**
-```bash
-# Abrir workspace otimizado
-code mcp-memory.code-workspace
-```
-
-#### 2. **Command Palette Integration**
-Use `Ctrl+Shift+P` para acessar todos os comandos MCP:
-
-- **MCP: Start Server** - Iniciar servidor
-- **MCP: Stop Server** - Parar servidor  
-- **MCP: Open Dashboard** - Abrir dashboard
-- **MCP: Show Status** - Ver status
-- **MCP: Debug Mode** - Modo debug
-- **MCP: Watch Mode** - Desenvolvimento ativo
-
-#### 3. **Atalhos de Teclado Otimizados**
-Comandos rápidos com `Ctrl+Shift+M` + tecla:
-
-- `S` - Iniciar servidor
-- `B` - Build projeto
-- `W` - Watch mode
-- `D` - Debug
-- `T` - Executar testes
-- `H` - Abrir dashboard
-
-#### 4. **Tasks Integradas**
-Acesse via `Ctrl+Shift+P` → "Tasks: Run Task":
-
-- **Build** - Compilar TypeScript
-- **Run MCP Memory Server** - Executar servidor
-- **Watch and Build** - Modo desenvolvimento
-- **Start Dashboard** - Interface web
-- **Test Memory Operations** - Executar testes
-- **Enable/Disable Auto Start** - Gerenciar auto-início
-
-#### 5. **Debug Configurations**
-Múltiplas opções de debug (`F5`):
-
-- **MCP Memory Server** - Debug padrão
-- **Debug TS Source** - Debug do código fonte
-- **MCP Dashboard** - Servidor + Dashboard
-- **MCP Test Mode** - Modo teste
-- **All MCP Services** - Tudo junto
-
-#### 6. **PowerShell Integration**
-Script avançado para controle total:
-
-```powershell
-# Comandos principais
-.\vscode-mcp.ps1 init       # Configurar VS Code
-.\vscode-mcp.ps1 help       # Mostrar todos os comandos
-.\vscode-mcp.ps1 dashboard  # Abrir dashboard
-.\vscode-mcp.ps1 status     # Status completo
-.\vscode-mcp.ps1 notify "Mensagem"  # Notificação
-```
-
-### 📊 Dashboard Visual (XAMPP)
-
-Acesse `http://localhost/mcp-dashboard.html` ou use `npm run dashboard` para:
-
-- Interface web integrada ao XAMPP Apache
-- Instruções detalhadas para comandos PowerShell
-- Comandos VS Code integrados (Command Palette)
-- Fluxo de trabalho completo e otimizado
-- Atalhos de teclado e configurações
-
-### 🔧 Configurações Automáticas
-
-O workspace inclui configurações otimizadas para:
-
-- IntelliSense aprimorado
-- Formatação automática
-- Lint integrado
-- Snippets personalizados
-- Extensões recomendadas
-- Settings específicos do projeto
-
-**Veja `VSCODE_INTEGRATION.md` para documentação completa!**
-
----
-
-## 🔄 Auto-Start Windows
-
-### Status Atual: ✅ **CONFIGURADO E FUNCIONANDO**
-
-O MCP Memory Server está configurado para:
-
-1. **✅ Auto-inicialização no login** (via Pasta de Inicialização)
-2. **✅ Dashboard web automático** (http://localhost:3000)
-3. **✅ Interface gráfica** (setup-windows.ps1)
-4. **✅ Scripts PowerShell avançados**
-5. **✅ Integração completa VS Code**
-
-### Comandos de Gerenciamento:
-
-```bash
-# Status completo
-.\auto-start.ps1 status
-
-# Habilitar/desabilitar
-npm run autostart:enable
-npm run autostart:disable
-
-# Interface gráfica
-.\setup-windows.ps1
-
-# VS Code integration
-.\vscode-mcp.ps1 init
-```
-
----
-
 ## Roadmap
 
-- [x] ✅ Interface web para visualização (Dashboard implementado)
-- [x] ✅ Auto-inicialização Windows (Configurado via Startup)
-- [x] ✅ Integração completa VS Code (Workspace + Commands + Debug)
-- [x] ✅ PowerShell scripts avançados (Controle total via scripts)
-- [x] ✅ Command Palette integration (Todos os comandos disponíveis)
-- [ ] 🔄 Suporte para importação/exportação de dados
-- [ ] 🔄 Integração com outros formatos de dados
-- [ ] 🔄 Métricas e analytics avançadas
-- [ ] 🔄 Backup automático e recuperação
-- [ ] 🔄 Suporte para múltiplos bancos de dados
+- [ ] Interface web para visualização do grafo
+- [ ] Suporte para importação/exportação de dados
+- [ ] Integração com outros formatos de dados
+- [ ] Métricas e analytics avançadas
+- [ ] Backup automático e recuperação
+- [ ] Suporte para múltiplos bancos de dados

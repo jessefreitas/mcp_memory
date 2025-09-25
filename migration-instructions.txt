@@ -1,0 +1,42 @@
+# Instruções para migração MCP Memory
+# Execute estes comandos no Claude Desktop:
+
+1. Certifique-se que está usando o servidor customizado em claude_desktop_config.json:
+{
+  "mcpServers": {
+    "memory-server": {
+      "command": "node",
+      "args": ["C:\\vscode\\mcp_memory\\build\\index.js"],
+      "env": {}
+    }
+  }
+}
+
+2. Execute o comando para criar a entidade:
+
+mcp_memory_create_entities com os dados:
+{
+  "entities": [
+    {
+      "name": "app_agente_project_files",
+      "entityType": "code_files",
+      "observations": [
+        "src/app_agente/main.py",
+        "src/app_agente/voice/recorder.py",
+        "src/app_agente/voice/stt.py",
+        "src/app_agente/voice/tts.py",
+        "src/app_agente/integrations/n8n.py",
+        "src/app_agente/orchestrator/crews.py",
+        "src/app_agente/orchestrator/flows.py",
+        "src/app_agente/agents/agent_s_wrapper.py",
+        "pyproject.toml",
+        "tests/test_app_agente.py"
+      ]
+    }
+  ]
+}
+
+3. Verificar se a migração funcionou:
+mcp_memory_read_graph
+
+Data da migração: 2025-09-25 01:20:37

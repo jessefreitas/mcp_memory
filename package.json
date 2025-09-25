@@ -3,30 +3,23 @@
   "version": "1.0.0",
   "description": "Model Context Protocol Memory Server - Persistent memory and entity management for AI conversations",
   "type": "module",
-  "main": "build/index.js",
+  "main": "build/simple-index.js",
   "bin": {
-    "mcp-memory-server": "build/index.js"
+    "mcp-memory-server": "build/simple-index.js"
   },
   "scripts": {
     "build": "tsc",
-    "start": "node build/index.js",
+    "build:unix": "tsc && chmod +x build/simple-index.js",
+    "start": "node build/simple-index.js",
     "dev": "tsc --watch",
     "test": "jest",
     "lint": "eslint src/**/*.ts",
     "format": "prettier --write src/**/*.ts",
-    "dashboard": "powershell -ExecutionPolicy Bypass -File setup-xampp.ps1 -Open",
-    "dashboard:node": "node dashboard-server.js",
-    "server:debug": "node --inspect build/index.js",
-    "server:memory": "cross-env MCP_MEMORY_DB=:memory: node build/index.js",
+    "dashboard": "node dashboard-server.js",
+    "server:debug": "node --inspect build/simple-index.js",
+    "server:memory": "cross-env MCP_MEMORY_FILE=memory-test.json node build/simple-index.js",
     "clean": "rimraf build",
-    "setup": "npm install && npm run build",
-    "install:service": "powershell -ExecutionPolicy Bypass -File install-service.ps1 install",
-    "uninstall:service": "powershell -ExecutionPolicy Bypass -File install-service.ps1 uninstall",
-    "autostart:enable": "powershell -ExecutionPolicy Bypass -File auto-start.ps1 task -Dashboard",
-    "autostart:disable": "powershell -ExecutionPolicy Bypass -File auto-start.ps1 remove",
-    "autostart:status": "powershell -ExecutionPolicy Bypass -File auto-start.ps1 status",
-    "xampp:setup": "powershell -ExecutionPolicy Bypass -File setup-xampp.ps1",
-    "xampp:open": "powershell -ExecutionPolicy Bypass -File setup-xampp.ps1 -Open"
+    "setup": "npm install && npm run build"
   },
   "keywords": [
     "mcp",

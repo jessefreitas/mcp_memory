@@ -1,0 +1,41 @@
+{
+  "entities": [
+    {
+      "type": "entity",
+      "name": "teste_persistencia",
+      "entityType": "teste",
+      "observations": [
+        "Teste de persistência executado em 2025-09-25 01:54:26",
+        "Dados criados via script de teste",
+        "Verificando se o salvamento funciona"
+      ]
+    },
+    {
+      "type": "entity",
+      "name": "mcp_memory_project",
+      "entityType": "projeto",
+      "observations": [
+        "Projeto MCP Memory Server",
+        "Servidor simplificado usando JSON",
+        "Teste de funcionalidade"
+      ]
+    },
+    {
+      "type": "entity",
+      "name": "teste_adicional_015507",
+      "entityType": "teste_adicional",
+      "observations": [
+        "Entidade adicionada em 2025-09-25 01:55:07",
+        "Testando adição incremental de dados",
+        "Verificando persistência contínua"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "from": "teste_persistencia",
+      "to": "mcp_memory_project",
+      "relationType": "pertence_a"
+    }
+  ]
+}

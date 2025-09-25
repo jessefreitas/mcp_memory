@@ -1,0 +1,41 @@
+# Configuração para Claude Desktop - Nosso Servidor MCP Memory Customizado
+
+# INSTRUÇÕES DE CONFIGURAÇÃO:
+# 
+# 1. Localize o arquivo claude_desktop_config.json:
+#    Windows: %APPDATA%\Claude\claude_desktop_config.json
+#    
+# 2. Substitua o conteúdo atual por:
+
+{
+  "mcpServers": {
+    "memory-server": {
+      "command": "node",
+      "args": ["C:\\vscode\\mcp_memory\\build\\index.js"],
+      "env": {
+        "MCP_MEMORY_DB": "C:\\vscode\\mcp_memory\\memory.db"
+      }
+    }
+  }
+}
+
+# DIFERENÇAS ENTRE OS SERVIDORES:
+#
+# SERVIDOR OFICIAL (@modelcontextprotocol/server-memory):
+# - Simples, básico
+# - Armazenamento em JSON
+# - Funcionalidades limitadas
+# - Localização: C:\mcp\memory.json
+#
+# NOSSO SERVIDOR CUSTOMIZADO:
+# - Funcionalidades avançadas
+# - Armazenamento em SQLite
+# - Recursos extras (dashboard, monitoring, etc.)
+# - Localização: C:\vscode\mcp_memory\memory.db
+# - Integração com VS Code
+# - Scripts de automação
+# - Dashboard visual
+# - Monitoramento contínuo
+
+# MIGRAÇÃO DE DADOS:
+# Execute .\migrate-memory.ps1 para preparar a migração dos dados existentes

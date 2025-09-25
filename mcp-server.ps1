@@ -124,7 +124,7 @@ function Build-Project {
   Write-ColorOutput "✅ Compilação concluída!" $Green
 }
 
-function Remove-BuildFiles {
+function Clean-Build {
   Write-ColorOutput "🧹 Limpando arquivos de build..." $Blue
   if (Test-Path "build") {
     Remove-Item -Path "build" -Recurse -Force
@@ -168,7 +168,7 @@ switch ($Action.ToLower()) {
   }
   "status" { Get-MCPStatus }
   "build" { Build-Project }
-  "clean" { Remove-BuildFiles }
+  "clean" { Clean-Build }
   "test" { Test-MCPServer }
   default {
     Write-ColorOutput "❓ Uso: .\mcp-server.ps1 [start|stop|restart|status|build|clean|test] [-Debug] [-Memory] [-DbPath <path>]" $Yellow

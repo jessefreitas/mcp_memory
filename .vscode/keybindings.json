@@ -31,49 +31,7 @@
     {
         "key": "ctrl+shift+m ctrl+h",
         "command": "simpleBrowser.show",
-        "args": "http://localhost:3000",
-        "when": "workspaceFolder"
-    },
-    {
-        "key": "ctrl+shift+m ctrl+a",
-        "command": "workbench.action.tasks.runTask",
-        "args": "Enable Auto Start",
-        "when": "workspaceFolder"
-    },
-    {
-        "key": "ctrl+shift+m ctrl+r",
-        "command": "workbench.action.tasks.runTask",
-        "args": "Disable Auto Start",
-        "when": "workspaceFolder"
-    },
-    {
-        "key": "ctrl+shift+m ctrl+g",
-        "command": "workbench.action.tasks.runTask",
-        "args": "Setup Windows GUI",
-        "when": "workspaceFolder"
-    },
-    {
-        "key": "ctrl+shift+m ctrl+i",
-        "command": "workbench.action.tasks.runTask",
-        "args": "MCP: Initialize Integration",
-        "when": "workspaceFolder"
-    },
-    {
-        "key": "ctrl+shift+m ctrl+p",
-        "command": "workbench.action.tasks.runTask",
-        "args": "MCP: Show Command Palette",
-        "when": "workspaceFolder"
-    },
-    {
-        "key": "ctrl+shift+m ctrl+x",
-        "command": "workbench.action.tasks.runTask",
-        "args": "MCP: Stop Server",
-        "when": "workspaceFolder"
-    },
-    {
-        "key": "ctrl+shift+m ctrl+z",
-        "command": "workbench.action.tasks.runTask",
-        "args": "MCP: Show Status",
+        "args": "file:///c:/vscode/mcp_memory/dashboard.html",
         "when": "workspaceFolder"
     }
 ]

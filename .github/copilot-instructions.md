@@ -1,49 +1,55 @@
-# MCP Memory Server - Copilot Instructions
+<!-- Use this file to provide workspace-specific custom instructions to Copilot. For more details, visit https://code.visualstudio.com/docs/copilot/copilot-customization#_use-a-githubcopilotinstructionsmd-file -->
 
-## Projeto Completo ✅
+- [x] Verify that the copilot-instructions.md file in the .github directory is created. ✅ Created successfully
 
-### Funcionalidades Implementadas:
+- [x] Clarify Project Requirements ✅ MCP Memory Server with TypeScript, persistent storage, entity management
+<!-- Ask for project type, language, and frameworks if not specified. Skip if already provided. -->
 
-- **MCP Memory Server**: Servidor completo com TypeScript, persistent storage, entity management
-- **TypeScript MCP Server Structure**: SDK integrado, memory features, entities e relations  
-- **Complete Implementation**: Persistent storage, entities, relations, e tools MCP
-- **Extensions Required**: TypeScript e Node.js development extensions instaladas
-- **Compilation Success**: TypeScript compilation, database setup completo
-- **Task Creation**: MCP Memory Server task criada e executando
-- **VS Code Integration**: Projeto completamente integrado ao VS Code
-- **Complete Documentation**: Documentação completa com integração VS Code
+- [x] Scaffold the Project ✅ TypeScript MCP server structure created with SDK, memory features, and entities
+<!--
+Ensure that the previous step has been marked as completed.
+Call project setup tool with projectType parameter.
+Run scaffolding command to create project files and folders.
+Use '.' as the working directory.
+If no appropriate projectType is available, search documentation using available tools.
+Otherwise, create the project structure manually using available file creation tools.
+-->
 
-### Estrutura do Projeto:
+- [x] Customize the Project ✅ Complete MCP Memory Server implementation with persistent storage, entities, relations, and tools
+<!--
+Verify that all previous steps have been completed successfully and you have marked the step as completed.
+Develop a plan to modify codebase according to user requirements.
+Apply modifications using appropriate tools and user-provided references.
+Skip this step for "Hello World" projects.
+-->
 
-- **src/index.ts**: Servidor MCP principal
-- **src/memory/MemoryManager.ts**: Gerenciamento de entidades e relacionamentos
-- **src/tools/index.ts**: Tools MCP (create_entities, add_observations, etc.)
-- **src/resources/index.ts**: Resources MCP (read_graph, search_nodes, etc.)
-- **dashboard-server.js**: Dashboard web em tempo real
-- **auto-start.ps1**: Auto-inicialização Windows
-- **vscode-mcp.ps1**: Integração VS Code simulada
-- **.vscode/**: Configurações completas VS Code (launch, tasks, keybindings)
+- [x] Install Required Extensions ✅ TypeScript and Node.js development extensions
+<!-- ONLY install extensions provided mentioned in the get_project_setup_info. Skip this step otherwise and mark as completed. -->
 
-### Estado Atual:
+- [x] Compile the Project ✅ TypeScript compilation successful, database setup complete
+<!--
+Verify that all previous steps have been completed.
+Install any missing dependencies.
+Run diagnostics and resolve any issues.
+Check for markdown files in project folder for relevant instructions on how to do this.
+-->
 
-✅ Servidor MCP funcionando  
-✅ Banco SQLite persistente  
-✅ Auto-start Windows configurado  
-✅ Dashboard web ativo  
-✅ VS Code completamente integrado  
-✅ Command Palette funcional  
-✅ Debug configurations prontas  
-✅ Tasks automatizadas  
-✅ Atalhos de teclado configurados  
+- [x] Create and Run Task ✅ MCP Memory Server task created and running successfully
+<!--
+Verify that all previous steps have been completed.
+Check https://code.visualstudio.com/docs/debugtest/tasks to determine if the project needs a task. If so, use the create_and_run_task to create and launch a task based on package.json, README.md, and project structure.
+Skip this step otherwise.
+ -->
 
-### Comandos Principais:
+- [x] Launch the Project ✅ Projeto completamente integrado ao VS Code
+<!--
+Verify that all previous steps have been completed.
+Prompt user for debug mode, launch only if confirmed.
+ -->
 
-- `npm run build` - Compilar TypeScript
-- `npm start` - Iniciar servidor MCP
-- `npm run dashboard` - Abrir dashboard
-- `.\vscode-mcp.ps1 init` - Configurar VS Code
-- `.\auto-start.ps1 status` - Status auto-start
-- `Ctrl+Shift+M` + tecla - Atalhos rápidos
-- `F5` - Debug configurations
-
-**Status: PROJETO 100% COMPLETO E FUNCIONAL** 🎉
+- [x] Ensure Documentation is Complete ✅ Documentação completa com integração VS Code
+<!--
+Verify that all previous steps have been completed.
+Verify that README.md and the copilot-instructions.md file in the .github directory exists and contains current project information.
+Clean up the copilot-instructions.md file in the .github directory by removing all HTML comments.
+ -->

@@ -2,14 +2,13 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "🧠 MCP Memory Server",
+      "name": "Debug MCP Memory Server",
       "type": "node",
       "request": "launch",
       "program": "${workspaceFolder}/build/index.js",
       "console": "integratedTerminal",
       "env": {
-        "NODE_ENV": "production",
-        "MCP_MEMORY_DB": "${workspaceFolder}/memory.db"
+        "NODE_ENV": "development"
       },
       "preLaunchTask": "build",
       "outFiles": [
@@ -17,55 +16,27 @@
       ],
       "skipFiles": [
         "<node_internals>/**"
-      ],
-      "presentation": {
-        "hidden": false,
-        "group": "MCP",
-        "order": 1
-      }
+      ]
     },
     {
-      "name": "🐛 MCP Debug Mode",
+      "name": "Debug TS Source",
       "type": "node",
       "request": "launch",
-      "program": "${workspaceFolder}/build/index.js",
+      "program": "${workspaceFolder}/src/index.ts",
       "console": "integratedTerminal",
       "env": {
-        "NODE_ENV": "development",
-        "MCP_MEMORY_DB": "${workspaceFolder}/memory.db"
+        "NODE_ENV": "development"
       },
-      "preLaunchTask": "build",
-      "outFiles": [
-        "${workspaceFolder}/build/**/*.js"
+      "runtimeArgs": [
+        "--loader",
+        "ts-node/esm"
       ],
       "skipFiles": [
         "<node_internals>/**"
-      ],
-      "stopOnEntry": false,
-      "presentation": {
-        "hidden": false,
-        "group": "MCP",
-        "order": 2
-      }
+      ]
     },
     {
-      "name": "📊 MCP Dashboard",
-      "type": "node",
-      "request": "launch",
-      "program": "${workspaceFolder}/dashboard-server.js",
-      "console": "integratedTerminal",
-      "env": {
-        "NODE_ENV": "development",
-        "PORT": "3000"
-      },
-      "presentation": {
-        "hidden": false,
-        "group": "MCP",
-        "order": 3
-      }
-    },
-    {
-      "name": "🧪 MCP Test Mode",
+      "name": "Test MCP Memory Server",
       "type": "node",
       "request": "launch",
       "program": "${workspaceFolder}/build/index.js",
@@ -75,26 +46,9 @@
         "MCP_MEMORY_DB": ":memory:"
       },
       "preLaunchTask": "build",
-      "presentation": {
-        "hidden": false,
-        "group": "MCP",
-        "order": 4
-      }
-    }
-  ],
-  "compounds": [
-    {
-      "name": "🚀 MCP Full Stack",
-      "configurations": [
-        "🧠 MCP Memory Server",
-        "📊 MCP Dashboard"
-      ],
-      "stopAll": true,
-      "presentation": {
-        "hidden": false,
-        "group": "MCP",
-        "order": 1
-      }
+      "outFiles": [
+        "${workspaceFolder}/build/**/*.js"
+      ]
     }
   ]
 }
